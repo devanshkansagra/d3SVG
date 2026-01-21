@@ -4,6 +4,7 @@ import * as d3 from "d3";
 import { buildPath } from "@/lib/buildPath";
 import { Props } from "@/definitions/Props";
 import { Attachment } from "@/definitions/Attachment";
+import { Registry } from "@/lib/Registry";
 
 export function Diagram({
   data,
@@ -78,50 +79,10 @@ export function Diagram({
         const size = attr.size || 10;
         const offset = size * 0.7;
 
-        if (attr.shape === "circle") {
-          attachmentGroup
-            .append("circle")
-            .attr("cx", coords.x)
-            .attr("cy", coords.y)
-            .attr("r", size / 2)
-            .attr("fill", attr.color || "gray");
-        } else if (attr.shape === "rect") {
-          attachmentGroup
-            .append("rect")
-            .attr("x", coords.x - size / 2)
-            .attr("y", coords.y - size / 2)
-            .attr("width", size)
-            .attr("height", size)
-            .attr("fill", attr.color || "gray");
-        } else if (attr.shape === "transformer") {
-          let angle = attr.orientation === "horizontal" ? 90 : 0;
-          const g = attachmentGroup
-            .append("g")
-            .attr(
-              "transform",
-              `translate(${coords.x}, ${coords.y}) rotate(${angle})`,
-            );
+        const renderer = Registry[attr.shape];
 
-          g.append("circle")
-            .attr("cy", -offset)
-            .attr("r", size)
-            .attr("fill", "white")
-            .attr("stroke", attr.color || "black")
-            .attr("stroke-width", 2);
-          g.append("circle")
-            .attr("cy", offset)
-            .attr("r", size)
-            .attr("fill", "white")
-            .attr("stroke", attr.color || "black")
-            .attr("stroke-width", 2);
-        } else if (attr.shape === "image" && attr.url) {
-          attachmentGroup
-            .append("image")
-            .attr("href", attr.url)
-            .attr("x", coords.x - size / 2)
-            .attr("y", coords.y - size / 2)
-            .attr("width", size)
-            .attr("height", size);
+        if(renderer) {
+          renderer.render(attachmentGroup.append("g"), attr, coords);
         }
 
         if (attr.label) {

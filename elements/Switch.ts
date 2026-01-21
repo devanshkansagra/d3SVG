@@ -17,6 +17,6 @@ export class Switch implements Element {
       .attr("y", coord.y - size / 2)
       .attr("width", size)
       .attr("height", size)
-      .attr("fill", "#c21d11");
+      .attr("fill", "darkgreen");
   }
 }
