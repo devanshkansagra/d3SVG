@@ -21,9 +21,9 @@ export default function Home() {
         { x: 150, y: 180 },
       ],
       attachments: [
-        { pos: 0.2, shape: "rect", color: "darkgreen", size: 20, label: "s1" },
-        { pos: 0.5, shape: "circle", color: "silver", size: 25, label: "CT1" },
-        { pos: 0.8, shape: "rect", color: "#c21d11", size: 30, label: "CB1" },
+        { pos: 0.2, shape: "switch", color: "darkgreen", size: 20, label: "s1" },
+        { pos: 0.5, shape: "ct", color: "silver", size: 25, label: "CT1" },
+        { pos: 0.8, shape: "cb", color: "#c21d11", size: 30, label: "CB1" },
       ],
     },
     {
@@ -39,7 +39,7 @@ export default function Home() {
       attachments: [
         {
           pos: 0.88,
-          shape: "rect",
+          shape: "merging",
           color: "#3261e3",
           size: 50,
           label: "Merging",
@@ -55,7 +55,7 @@ export default function Home() {
       lineType: "dashed",
       color: "orange",
       attachments: [
-        { pos: 0.9, shape: "rect", color: "orange", size: 50, label: "Bay" },
+        { pos: 0.9, shape: "bay", color: "orange", size: 50, label: "Bay" },
       ],
     },
     {
@@ -72,9 +72,9 @@ export default function Home() {
         { x: 40, y: 580 },
       ],
       attachments: [
-        { pos: 0.08, shape: "rect", color: "darkgreen", size: 20, label: "s2" },
-        { pos: 0.2, shape: "circle", color: "silver", size: 25, label: "CT2" },
-        { pos: 0.3, shape: "rect", color: "#c21d11", size: 30, label: "CB2" },
+        { pos: 0.08, shape: "switch", color: "darkgreen", size: 20, label: "s2" },
+        { pos: 0.2, shape: "ct", color: "silver", size: 25, label: "CT2" },
+        { pos: 0.3, shape: "cb", color: "#c21d11", size: 30, label: "CB2" },
         {
           pos: 0.5,
           shape: "transformer",
@@ -82,9 +82,9 @@ export default function Home() {
           size: 20,
           orientation: "vertical",
         },
-        { pos: 0.68, shape: "circle", color: "silver", size: 25, label: "CT3" },
-        { pos: 0.8, shape: "rect", color: "#c21d11", size: 30, label: "CB3" },
-        { pos: 0.9, shape: "rect", color: "darkgreen", size: 20, label: "s3" },
+        { pos: 0.68, shape: "ct", color: "silver", size: 25, label: "CT3" },
+        { pos: 0.8, shape: "cb", color: "#c21d11", size: 30, label: "CB3" },
+        { pos: 0.9, shape: "switch", color: "darkgreen", size: 20, label: "s3" },
       ],
     },
     {
@@ -94,9 +94,9 @@ export default function Home() {
         { x: 260, y: 580 },
       ],
       attachments: [
-        { pos: 0.08, shape: "rect", color: "darkgreen", size: 20, label: "s5" },
-        { pos: 0.2, shape: "circle", color: "silver", size: 25, label: "CT2" },
-        { pos: 0.3, shape: "rect", color: "#c21d11", size: 30, label: "CB4" },
+        { pos: 0.08, shape: "switch", color: "darkgreen", size: 20, label: "s5" },
+        { pos: 0.2, shape: "ct", color: "silver", size: 25, label: "CT2" },
+        { pos: 0.3, shape: "cb", color: "#c21d11", size: 30, label: "CB4" },
         {
           pos: 0.5,
           shape: "transformer",
@@ -104,9 +104,9 @@ export default function Home() {
           size: 20,
           orientation: "vertical",
         },
-        { pos: 0.68, shape: "circle", color: "silver", size: 25, label: "CT3" },
-        { pos: 0.8, shape: "rect", color: "#c21d11", size: 30, label: "CB5" },
-        { pos: 0.9, shape: "rect", color: "darkgreen", size: 20, label: "s6" },
+        { pos: 0.68, shape: "ct", color: "silver", size: 25, label: "CT3" },
+        { pos: 0.8, shape: "cb", color: "#c21d11", size: 30, label: "CB5" },
+        { pos: 0.9, shape: "switch", color: "darkgreen", size: 20, label: "s6" },
       ],
     },
     {
@@ -115,9 +115,9 @@ export default function Home() {
         { x: 280, y: 580 },
       ],
       attachments: [
-        { pos: 0.5, shape: "rect", color: "#c21d11", size: 30, label: "CB6" },
-        { pos: 0.25, shape: "rect", color: "darkgreen", size: 20, label: "s7" },
-        { pos: 0.75, shape: "rect", color: "darkgreen", size: 20, label: "s8" },
+        { pos: 0.5, shape: "cb", color: "#c21d11", size: 30, label: "CB6" },
+        { pos: 0.25, shape: "switch", color: "darkgreen", size: 20, label: "s7" },
+        { pos: 0.75, shape: "switch", color: "darkgreen", size: 20, label: "s8" },
       ],
     },
     {
@@ -126,9 +126,9 @@ export default function Home() {
         { x: 30, y: 700 },
       ],
       attachments: [
-        { pos: 0.2, shape: "rect", color: "darkgreen", size: 20, label: "s9" },
-        { pos: 0.5, shape: "rect", color: "#c21d11", size: 30, label: "CB7" },
-        { pos: 0.8, shape: "circle", color: "silver", size: 25, label: "CT6" },
+        { pos: 0.2, shape: "switch", color: "darkgreen", size: 20, label: "s9" },
+        { pos: 0.5, shape: "cb", color: "#c21d11", size: 30, label: "CB7" },
+        { pos: 0.8, shape: "ct", color: "silver", size: 25, label: "CT6" },
       ],
     },
     {
@@ -137,9 +137,9 @@ export default function Home() {
         { x: 270, y: 700 },
       ],
       attachments: [
-        { pos: 0.5, shape: "rect", color: "#c21d11", size: 30, label: "CB8" },
-        { pos: 0.2, shape: "rect", color: "darkgreen", size: 20, label: "s10" },
-        { pos: 0.8, shape: "circle", color: "silver", size: 25, label: "CT6" },
+        { pos: 0.5, shape: "cb", color: "#c21d11", size: 30, label: "CB8" },
+        { pos: 0.2, shape: "switch", color: "darkgreen", size: 20, label: "s10" },
+        { pos: 0.8, shape: "ct", color: "silver", size: 25, label: "CT6" },
       ],
     },
     {
@@ -233,7 +233,7 @@ export default function Home() {
       attachments: [
         {
           pos: 0.6,
-          shape: "rect",
+          shape: "merging",
           color: "#3261e3",
           size: 50,
           label: "Merging",
@@ -249,7 +249,7 @@ export default function Home() {
       lineType: "dashed",
       color: "orange",
       attachments: [
-        { pos: 0.7, shape: "rect", color: "orange", size: 50, label: "Bay" },
+        { pos: 0.7, shape: "bay", color: "orange", size: 50, label: "Bay" },
       ],
     },
     {
@@ -265,7 +265,7 @@ export default function Home() {
         { x: 480, y: 640 },
       ],
       attachments: [
-        { pos: 0.7, shape: "rect", color: "orange", size: 50, label: "Bay" },
+        { pos: 0.7, shape: "bay", color: "orange", size: 50, label: "Bay" },
       ],
     },
     {
@@ -281,7 +281,7 @@ export default function Home() {
         { x: 650, y: 114 },
       ],
       attachments: [
-        { pos: 0.5, shape: "rect", color: "#31ad11", size: 70, label: "IED-1" },
+        { pos: 0.5, shape: "ied", color: "#31ad11", size: 70, label: "IED-1" },
       ],
     },
     {
@@ -290,7 +290,7 @@ export default function Home() {
         { x: 650, y: 330 },
       ],
       attachments: [
-        { pos: 0.5, shape: "rect", color: "#31ad11", size: 70, label: "IED-2" },
+        { pos: 0.5, shape: "ied", color: "#31ad11", size: 70, label: "IED-2" },
       ],
     },
     {
@@ -299,7 +299,7 @@ export default function Home() {
         { x: 650, y: 600 },
       ],
       attachments: [
-        { pos: 0.5, shape: "rect", color: "#31ad11", size: 70, label: "IED-3" },
+        { pos: 0.5, shape: "ied", color: "#31ad11", size: 70, label: "IED-3" },
       ],
     },
     {
@@ -351,7 +351,7 @@ export default function Home() {
   return (
     <div className="flex h-screen">
       {/* LEFT SIDE: DIAGRAM */}
-      <div className="flex-grow overflow-auto p-4">
+      <div className="grow overflow-auto p-4">
         <Diagram
           data={substationData}
           width={1500}

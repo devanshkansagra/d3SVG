@@ -29,7 +29,13 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2f$src$2f
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$selection$2f$src$2f$select$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__select$3e$__ = __turbopack_context__.i("[project]/node_modules/d3-selection/src/select.js [app-ssr] (ecmascript) <export default as select>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$d3$2d$ease$2f$src$2f$linear$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__linear__as__easeLinear$3e$__ = __turbopack_context__.i("[project]/node_modules/d3-ease/src/linear.js [app-ssr] (ecmascript) <export linear as easeLinear>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$buildPath$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/lib/buildPath.ts [app-ssr] (ecmascript)");
+(()=>{
+    const e = new Error("Cannot find module '@/elements/Registry'");
+    e.code = 'MODULE_NOT_FOUND';
+    throw e;
+})();
 "use client";
+;
 ;
 ;
 ;
@@ -70,21 +76,65 @@ function Diagram({ data, width, height, stroke = "white", strokeWidth = 2, activ
                 const coords = pathNode.getPointAtLength(attr.pos * length);
                 const size = attr.size || 10;
                 const offset = size * 0.7;
-                if (attr.shape === "circle") {
-                    attachmentGroup.append("circle").attr("cx", coords.x).attr("cy", coords.y).attr("r", size / 2).attr("fill", attr.color || "gray");
-                } else if (attr.shape === "rect") {
-                    attachmentGroup.append("rect").attr("x", coords.x - size / 2).attr("y", coords.y - size / 2).attr("width", size).attr("height", size).attr("fill", attr.color || "gray");
-                } else if (attr.shape === "transformer") {
-                    let angle = attr.orientation === "horizontal" ? 90 : 0;
-                    const g = attachmentGroup.append("g").attr("transform", `translate(${coords.x}, ${coords.y}) rotate(${angle})`);
-                    g.append("circle").attr("cy", -offset).attr("r", size).attr("fill", "white").attr("stroke", attr.color || "black").attr("stroke-width", 2);
-                    g.append("circle").attr("cy", offset).attr("r", size).attr("fill", "white").attr("stroke", attr.color || "black").attr("stroke-width", 2);
-                } else if (attr.shape === "image" && attr.url) {
-                    attachmentGroup.append("image").attr("href", attr.url).attr("x", coords.x - size / 2).attr("y", coords.y - size / 2).attr("width", size).attr("height", size);
+                const renderer = Registry[attr.shape];
+                if (renderer) {
+                    renderer.render(attachmentGroup.append("g"), attr, coords);
                 }
-                if (attr.label) {
-                    attachmentGroup.append("text").attr("x", coords.x).attr("y", coords.y).attr("text-anchor", "middle").attr("dominant-baseline", "middle").attr("fill", "white").style("font-size", "10px").text(attr.label);
-                }
+            // if (attr.shape === "circle") {
+            //   attachmentGroup
+            //     .append("circle")
+            //     .attr("cx", coords.x)
+            //     .attr("cy", coords.y)
+            //     .attr("r", size / 2)
+            //     .attr("fill", attr.color || "gray");
+            // } else if (attr.shape === "rect") {
+            //   attachmentGroup
+            //     .append("rect")
+            //     .attr("x", coords.x - size / 2)
+            //     .attr("y", coords.y - size / 2)
+            //     .attr("width", size)
+            //     .attr("height", size)
+            //     .attr("fill", attr.color || "gray");
+            // } else if (attr.shape === "transformer") {
+            //   let angle = attr.orientation === "horizontal" ? 90 : 0;
+            //   const g = attachmentGroup
+            //     .append("g")
+            //     .attr(
+            //       "transform",
+            //       `translate(${coords.x}, ${coords.y}) rotate(${angle})`,
+            //     );
+            //   g.append("circle")
+            //     .attr("cy", -offset)
+            //     .attr("r", size)
+            //     .attr("fill", "white")
+            //     .attr("stroke", attr.color || "black")
+            //     .attr("stroke-width", 2);
+            //   g.append("circle")
+            //     .attr("cy", offset)
+            //     .attr("r", size)
+            //     .attr("fill", "white")
+            //     .attr("stroke", attr.color || "black")
+            //     .attr("stroke-width", 2);
+            // } else if (attr.shape === "image" && attr.url) {
+            //   attachmentGroup
+            //     .append("image")
+            //     .attr("href", attr.url)
+            //     .attr("x", coords.x - size / 2)
+            //     .attr("y", coords.y - size / 2)
+            //     .attr("width", size)
+            //     .attr("height", size);
+            // }
+            // if (attr.label) {
+            //   attachmentGroup
+            //     .append("text")
+            //     .attr("x", coords.x)
+            //     .attr("y", coords.y)
+            //     .attr("text-anchor", "middle")
+            //     .attr("dominant-baseline", "middle")
+            //     .attr("fill", "white")
+            //     .style("font-size", "10px")
+            //     .text(attr.label);
+            // }
             });
         });
     }, [
@@ -99,7 +149,7 @@ function Diagram({ data, width, height, stroke = "white", strokeWidth = 2, activ
         height: height
     }, void 0, false, {
         fileName: "[project]/components/Diagram.tsx",
-        lineNumber: 142,
+        lineNumber: 149,
         columnNumber: 10
     }, this);
 }
