@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@keyframes flow {
+  from {
+    stroke-dashoffset: 20;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.flow-line {
+  stroke-dasharray: 4, 6; /* 4px dash, 6px gap */
+  animation: flow 1s linear infinite;
+}
