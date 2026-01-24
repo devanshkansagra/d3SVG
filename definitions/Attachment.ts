@@ -1,5 +1,5 @@
 export interface Attachment {
-  pos: number; // Removed pointIndex as it's now nested
+  pos: number;
   shape:
     | "ct"
     | "cb"
@@ -15,3 +15,7 @@ export interface Attachment {
   url?: string;
   orientation?: string;
 }
+
+export type AttachmentShape = {
+  
+};

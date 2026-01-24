@@ -2,65 +2,60 @@
 import { useRef, useEffect } from "react";
 import * as d3 from "d3";
 import { buildPath } from "@/lib/buildPath";
-import { Point } from "@/definitions/Point";
-import { DiagramBranch } from "@/definitions/DiagramBranch";
+import { Props } from "@/definitions/Props";
 import { Attachment } from "@/definitions/Attachment";
 import { Registry } from "@/lib/Registry";
+import { Point } from "@/definitions/Point";
 
-// Define the shape of the data coming from canvas.toJSON()
-interface SerializedCanvas {
-  props: {
-    width: number;
-    height: number;
-    stroke?: string;
-    strokeWidth?: number;
-    activeId?: string;
-  };
-  paths: DiagramBranch[];
-}
-
-export function Diagram({ canvas }: { canvas: SerializedCanvas }) {
+export function Diagram({
+  data,
+  width,
+  height,
+  stroke = "white",
+  strokeWidth = 2,
+  activeId,
+}: Props) {
   const svgRef = useRef<SVGSVGElement | null>(null);
 
-  // 1. Access properties directly from the 'props' key in the plain object
-  const { width, height, stroke, strokeWidth, activeId } = canvas.props;
-
   useEffect(() => {
-    if (!svgRef.current) return;
-
     const svg = d3.select(svgRef.current);
     svg.selectAll("*").remove();
 
     const pathGroup = svg.append("g").attr("class", "paths-layer");
     const attachmentGroup = svg.append("g").attr("class", "attachments-layer");
 
-    // 2. Use the 'paths' array directly (it's already exported/flattened)
-    canvas.paths.forEach((branch: DiagramBranch) => {
+    data.forEach((branch) => {
       const d = buildPath(branch.points as Point[]);
       const isActive = activeId === branch.id;
 
+      // Determine dash array based on lineType
       let dashArray = "none";
-      if (branch.lineType === "dashed") dashArray = "5,5";
-      else if (branch.lineType === "dotted") dashArray = "2,2";
+      if (branch.lineType === "dashed") {
+        dashArray = "5,5";
+      } else if (branch.lineType === "dotted") {
+        dashArray = "2,2";
+      }
 
-      const pathColor = branch?.color || stroke || "#000";
+      const pathColor = branch?.color || stroke;
 
+      // 1. Draw Main Path
       const pathNode = pathGroup
         .append("path")
         .attr("d", d)
         .attr("fill", "none")
         .attr("stroke", pathColor)
-        .attr("stroke-width", strokeWidth || 2)
-        .attr("stroke-dasharray", dashArray)
+        .attr("stroke-width", strokeWidth)
+        .attr("stroke-dasharray", dashArray) // Apply the dash array here
         .node() as SVGPathElement;
 
+      // 2. Add Flow Animation if active
       if (isActive || branch.isAnimated) {
         pathGroup
           .append("path")
           .attr("d", d)
           .attr("fill", "none")
           .attr("stroke", "#00ffcc")
-          .attr("stroke-width", (strokeWidth || 2) + 1)
+          .attr("stroke-width", strokeWidth)
           .attr("stroke-dasharray", "8,8")
           .style("pointer-events", "none")
           .call((path) => {
@@ -79,11 +74,12 @@ export function Diagram({ canvas }: { canvas: SerializedCanvas }) {
       if (!pathNode) return;
       const length = pathNode.getTotalLength();
 
+      // 3. Draw Attachments for this specific branch
       branch.attachments?.forEach((attr: Attachment) => {
         const coords = pathNode.getPointAtLength(attr.pos * length) as Point;
         const renderer = Registry[attr.shape];
 
-        if (renderer) {
+        if(renderer) {
           renderer.render(attachmentGroup.append("g"), attr, coords);
         }
 
@@ -91,22 +87,16 @@ export function Diagram({ canvas }: { canvas: SerializedCanvas }) {
           attachmentGroup
             .append("text")
             .attr("x", coords.x)
-            .attr("y", coords.y - 12)
+            .attr("y", coords.y)
             .attr("text-anchor", "middle")
-            .attr("fill", "black")
+            .attr("dominant-baseline", "middle")
+            .attr("fill", "white")
             .style("font-size", "10px")
             .text(attr.label);
         }
       });
     });
-  }, [canvas, activeId, stroke, strokeWidth]);
+  }, [data, activeId, stroke, strokeWidth]);
 
-  return (
-    <svg 
-      ref={svgRef} 
-      width={width} 
-      height={height} 
-      style={{ border: "1px solid #ddd" }}
-    />
-  );
+  return <svg ref={svgRef} width={width} height={height} />;
 }
