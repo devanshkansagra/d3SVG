@@ -18,5 +18,16 @@ export class MergingControl implements Element {
       .attr("width", size)
       .attr("height", size)
       .attr("fill", "#3261e3");
+
+    if (attachment.label) {
+      group
+        .append("text")
+        .attr("x", coord.x)
+        .attr("y", coord.y) // Position label 5px above the circle
+        .attr("text-anchor", "middle")
+        .attr("fill", attachment.color || "white")
+        .style("font-size", "10px")
+        .text(attachment.label);
+    }
   }
 }

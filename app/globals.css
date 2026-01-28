@@ -13,3 +13,7 @@
   stroke-dasharray: 4, 6; /* 4px dash, 6px gap */
   animation: flow 1s linear infinite;
 }
+
+.attachments-layer {
+  background-color: white;
+}

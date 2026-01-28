@@ -1,5 +1,5 @@
 export interface Attachment {
-  pos: number;
+  pos?: number;
   shape:
     | "ct"
     | "cb"

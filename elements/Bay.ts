@@ -18,5 +18,16 @@ export class BayControl implements Element {
       .attr("width", size)
       .attr("height", size)
       .attr("fill", "orange");
+
+    if (attachment.label) {
+      group
+        .append("text")
+        .attr("x", coord.x)
+        .attr("y", coord.y) // Position label 5px above the circle
+        .attr("text-anchor", "middle")
+        .attr("fill", attachment.color || "white")
+        .style("font-size", "10px")
+        .text(attachment.label);
+    }
   }
 }

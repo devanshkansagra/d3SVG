@@ -58,9 +58,9 @@ export class PathBuilder {
     return len;
   }
 
-  private getPointAtPercent(t: number): Point {
-    if(this.points.length === 0) {
-        return { x: 0, y: 0 };
+  public getPointAtPercent(t: number): Point {
+    if (this.points.length === 0) {
+      return { x: 0, y: 0 };
     }
     const length = this.getTotalLength();
     let target = length * t;
@@ -88,11 +88,10 @@ export class PathBuilder {
 
   public connect(path: PathBuilder, t: number) {
     const p = path.getPointAtPercent(t);
-    if(this.points.length === 0) {
-        this.moveTo(p.x, p.y);
-    }
-    else {
-        this.lineTo(p.x, p.y);
+    if (this.points.length === 0) {
+      this.moveTo(p.x, p.y);
+    } else {
+      this.lineTo(p.x, p.y);
     }
     return this;
   }
@@ -107,8 +106,16 @@ export class PathBuilder {
     this.branches.push(b);
   }
 
-  public addAttachment(shape: Attachment["shape"], t: number, label: Attachment["label"]) {
-    this.attachments.push({ shape, pos: t, label });
+  public addAttachment(
+    shape: Attachment["shape"],
+    t: number,
+    extra: Partial<Omit<Attachment, "shape" | "pos">> = {},
+  ) {
+    this.attachments.push({
+      shape,
+      pos: t,
+      ...extra,
+    });
 
     return this;
   }
